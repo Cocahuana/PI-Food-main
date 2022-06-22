@@ -1,3 +1,4 @@
+const { STRING } = require('sequelize');
 const { DataTypes } = require('sequelize');
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
@@ -25,7 +26,7 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     analyzedInstructions:{
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY(DataTypes.JSON),
       allowNull: true,
     },
     //Separamos lo recibido de la API de lo creado en la BD
