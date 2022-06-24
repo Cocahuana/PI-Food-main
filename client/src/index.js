@@ -3,11 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {Provider} from 'react-redux';
+import {store} from "./store";
+import {BrowserRouter as Router} from 'react-router-dom';
+
+
+//Envolver la app en redux porque sino redux no va a funcionar como debería
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <Router>
+        <App />
+      </Router>
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 

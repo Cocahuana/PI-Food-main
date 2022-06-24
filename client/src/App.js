@@ -1,11 +1,16 @@
 import './App.css';
+import {Route, Switch} from 'react-router-dom';
+import LandingPage from './components/LandingPage';
+import Home from './components/Home';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Henry Food</h1>
-    </div>
+    <Switch>
+      <div className="App">
+        <Route exact path="/" component={LandingPage}/>
+        <Route path="/home" component={Home}/>
+      </div>
+    </Switch>
   );
 }
-
 export default App;
