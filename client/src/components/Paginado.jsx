@@ -6,9 +6,9 @@ export default function Paginado ({recipesPerPage, allRecipes, paginado}){
     // por paginado así creo varias paginas.
     // Redondeo para arriba porque si me no llegan a 9 los paginados, 
     // quiero que me traiga en la ultima pagina lo que sobre
-    for(let i = 1; i < Math.ceil(allRecipes / recipesPerPage); i++){
+    for(let i = 0; i < Math.ceil(allRecipes / recipesPerPage); i++){
         //Pusheo en el arreglo la cantidad total de paginas que va a tener la app
-        pageNumbers.push(i);
+        pageNumbers.push(i+1);
     }
     return(
         <nav>

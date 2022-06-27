@@ -1,10 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
-import { getRecipes } from "../actions";
+import { getRecipes, filterByDiets } from "../actions";
 import {Link} from 'react-router-dom';
 import Card from "./Card"
 import Paginado from "./Paginado";
+import SearchBar from "./SearchBar";
+
+//useSelector() Allows you to extract data from the Redux store state, using a selector function
+//useEffect actualiza cuando algo sucede
 
 export default function Home() {
     // Nos sirve para utilizar la constante despachando las acciones
@@ -38,11 +42,15 @@ export default function Home() {
         dispatch(getRecipes());
     }, [dispatch])
 
+
     //Cuando quiera resetear las recetas, el boton me llama acá
     //Sino, no me recarges la pagina
     function handleClick(e){
         e.preventDefault();
         dispatch(getRecipes());
+    }
+    function handleFilterDiets(e){
+        dispatch(filterByDiets(e.target.value));
     }
 
     //Vamos a renderizarlo
@@ -59,31 +67,44 @@ export default function Home() {
                     <option value="descendente">Descendente</option>
                 </select>
                 <select>
-                    <option value="moreHS">More HealthScore</option>
+                    <option value="mostHS">Most HealthScore</option>
                     <option value="lessHS">Less HealthScore</option>
                 </select>
-                <select>
-                    <option value="todos">Todos</option>
-                    <option value="vegan">vegan</option>
-                    <option value="paleo">paleo</option>
+                <select onClick={e => {handleFilterDiets(e)}}>
+                    <option value='All'>All</option>
+                    <option value='gluten free'>Gluten Free</option>
+                    <option value='ketogenic'>Ketogenic</option>
+                    <option value='vegetarian'>Vegetarian</option>
+                    <option value='lacto vegetarian'>Lacto Vegetarian</option>
+                    <option value='ovo vegetarian'>Ovo Vegetarian</option>
+                    <option value='vegan'>Vegan</option>
+                    <option value='pescetarian'>Pescetarian</option>
+                    <option value='paleo'>Paleo</option>
+                    <option value='primal'>Primal</option>
+                    <option value='low fodmap'>Low Fodmap</option>
+                    <option value='whole 30'>Whole 30</option>
                 </select>
                 <Paginado
                     recipesPerPage={recipesPerPage}
                     allRecipes={allRecipes.length}
                     paginado= {paginado}
                 />
+                <SearchBar/>
                 {
                     //Renderizo el componente card
                     //Primero pregunto si existe
                     currentRecipes?.map((e) =>{
+                        //console.log(currentRecipes);
                         return(
                             <Link to={"/home/" + e.id}>
                                 <div key={e.id}>
                                     <Card key={e.id}  title={e.title} img={e.img} dietTypes={e.dietTypes}/>
                                 </div>
-                            </Link>);
+                            </Link>
+                        );
                     })
                 }
+                
             </div>
         </div>
     )
