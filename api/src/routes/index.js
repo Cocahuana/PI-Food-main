@@ -8,9 +8,10 @@ const axios = require('axios');
 // traen los datos (data) es un objeto y dentro esta el resultado de la busqueda
 // Importo la api key desde .env
 const { API_KEY } = process.env;
-const BRING_ONLY_100 = "number=100";
+const BRING_ONLY_100 = "number=10";
 const DETAIL_URL = "addRecipeInformation=true";
 const { Recipe, Diet} = require("../db");
+const e = require('express');
 const router = Router();
 
 // Configurar los routers
@@ -40,7 +41,7 @@ const getApiInfo = async () => {
 };
 
 const getDbInfo = async () => {
-    return await Recipe.findAll({
+    const recipeDb = await Recipe.findAll({
         //Include takes an array of objects
         include:{
             model: Diet,
@@ -50,11 +51,22 @@ const getDbInfo = async () => {
             }
         }
     });
+    return recipeDb.map(e => {
+        return{
+            id: e.id,
+            title: e.title,
+            img: e.img,
+            summary: e.summary,
+            healthScore: e.healthScore,
+            dietTypes: e.diets.map(e => e.dietName),
+        }
+    })
 };
 
 const getAllRecipes = async () => {
     const apiInfo = await getApiInfo();
     const dbInfo = await getDbInfo();
+    console.log(dbInfo);
     const allInfo = apiInfo.concat(dbInfo);
     return allInfo;
 };
@@ -91,9 +103,11 @@ router.get("/getRecipes", async (req, res) => {
                 let recipesFiltered = filtered.map(e => {
                     return {
                         // Ruta principal por front
+                        id: e.id,
                         img: e.img,
                         title: e.title,
-                        dietTypes: e.dietTypes ? e.dietTypes : e.diets.map(e => e),
+                        healthScore: e.healthScore,
+                        dietTypes: e.dietTypes ? e.dietTypes : e.diets.map(e => e.dietName),
                     }
                 })
                 return res.status(200).send(recipesFiltered); 
@@ -101,13 +115,15 @@ router.get("/getRecipes", async (req, res) => {
             //Si no existe ninguna receta mostrar un mensaje adecuado
             return res.status(404).send("No se encontró la receta"); 
         }
-        // Si la receta no existe, traer todas.
+        // Si no se filtra la receta (valor por default al cargar la pagina web), traeme todas
         else{
             let recipesFiltered = recipesTotal.map(e => {
                 return {
+                    id: e.id,
                     img: e.img,
                     title: e.title,
-                    dietTypes: e.dietTypes ? e.dietTypes : e.diets.map(e => e.title),
+                    healthScore: e.healthScore,
+                    dietTypes: e.dietTypes ? e.dietTypes : e.diets.map(e => e.dietName),
                 }
             })
             return res.status(200).send(recipesFiltered); 
@@ -123,15 +139,34 @@ router.get("/getDetails/:id", async (req, res) => {
         if(id.length > 16){
             console.log(id)
             let recipesDbById = await getDbById(id);
-            res.status(200).json(recipesDbById);
+            if(recipesDbById){
+                let obj = {
+                    id: recipesDbById.id,
+                    title: recipesDbById.title,
+                    img: recipesDbById.img,
+                    healthScore: recipesDbById.healthScore,
+                    dietTypes: recipesDbById.diets.map(e => e.dietName),
+                    dishTypes: recipesDbById.dishTypes,
+                    summary: recipesDbById.summary,
+                    analyzedInstructions: recipesDbById.analyzedInstructions.map(e => {
+                        return {
+                            number: e.number,
+                            step: e.step
+                        }
+                    })
+                }
+                console.log(obj);
+                res.status(200).send(obj);
+            }
         }
         else{
             const numberedId = parseInt(id); 
             let detailedRecipe = await getApiDetail(numberedId);
             if(detailedRecipe){
                 let recipeDetailed = {
+                    id: detailedRecipe.id,
                     title: detailedRecipe.title,
-                    img: detailedRecipe.img,
+                    img: detailedRecipe.image,
                     healthScore: detailedRecipe.healthScore,
                     //DietTypes es un arreglo de Strings
                     dietTypes: detailedRecipe.dietTypes ? detailedRecipe.dietTypes : detailedRecipe.diets.map(e => e),
@@ -211,18 +246,22 @@ router.post("/postRecipe", async (req, res) => {
     // Recibe los datos recolectados desde el formulario controlado de la 
     // ruta de creación de recetas por body
     try{
-        const { title, summary, healthScore, analyzedInstructions, dietTypes } = req.body;
-        const newRecipe = await Recipe.create({
+        let { title, img, summary, healthScore, analyzedInstructions, diet } = req.body;
+        let newRecipe = await Recipe.create({
             title,
+            img,
             summary,
             healthScore,
             analyzedInstructions,
-        })
-    
+        });
+
+        console.log("dietTypes: " + diet);
+
         let dietTypesRecipeForDb = await Diet.findAll({
-            where: {dietName: dietTypes}
-        })
-        console.log(dietTypesRecipeForDb);
+            where: {dietName: diet}
+        });
+
+        console.log("dietType: " + dietTypesRecipeForDb);
         newRecipe.addDiet(dietTypesRecipeForDb);
         res.status(200).send(newRecipe);
     }

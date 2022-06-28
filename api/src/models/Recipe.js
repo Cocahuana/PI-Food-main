@@ -21,6 +21,10 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    img:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     healthScore:{
       type: DataTypes.INTEGER,
       allowNull: true,
