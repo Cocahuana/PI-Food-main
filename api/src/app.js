@@ -23,9 +23,10 @@ server.use((req, res, next) => {
 });
 
 server.use('/', routes);
-
+//Middelware para el manejo de errores
 //Validación del post
 server.use((error, req, res, next) => {
+  // Que responda con un Bad Request y en un objeto, el mensaje con su respectivo error
   res.status(400).json({
       status: 'error',
       message: error.message,
