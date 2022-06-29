@@ -1,10 +1,20 @@
-import {GET_RECIPES, FILTER_BY_DIETS, GET_RECIPES_BY_TITLE, GET_DIETS,POST_RECIPE} from '../actions'
+import {
+    GET_RECIPES, 
+    FILTER_BY_DIETS, 
+    GET_RECIPES_BY_TITLE, 
+    GET_DIETS, 
+    ORDER_BY_TITLE,
+    ORDER_BY_HEALTHSCORE,
+    POST_RECIPE,
+    GET_RECIPE_DETAILS,
+} from '../actions'
 //Armamos el estado inicial
 const initialState = {
     recipes: [],
     //Estado para que siempre tenga todas las recetas, sino lo tengo, pierdo los estados despues de hacer un filtrado
     allRecipes: [],
-    diets: []
+    diets: [],
+    recipesDetail: [],
 }
 
 
@@ -56,6 +66,60 @@ function rootReducer(state = initialState, action){
         case POST_RECIPE:
             return{
                 ...state,
+                recipe: [action.payload, ...state.recipes]
+            }
+        case ORDER_BY_TITLE:
+            let sortedTitle = action.payload === 'ascendente' ?
+                state.recipes.sort(function (a, b) {
+                    if(a.title > b.title){
+                        return 1;
+                    }
+                    if(b.title > a.title){
+                        return -1;
+                    }
+                    return 0;
+                }) :
+                state.recipes.sort(function(a, b){
+                    if(a.title > b.title){
+                        return -1;
+                    }
+                    if(b.title > a.title){
+                        return 1;
+                    }
+                    return 0;
+                });
+            return {
+                ...state,
+                recipes: sortedTitle
+            }
+        case ORDER_BY_HEALTHSCORE:
+            let sortedHealthScore = action.payload === 'mostHS' ?
+                state.recipes.sort(function (a, b) {
+                    if(a.healthScore > b.healthScore){
+                        return -1;
+                    }
+                    if(b.healthScore > a.healthScore){
+                        return 1;
+                    }
+                    return 0;
+                }) :
+                state.recipes.sort(function(a, b){
+                    if(a.healthScore > b.healthScore){
+                        return 1;
+                    }
+                    if(b.healthScore > a.healthScore){
+                        return -1;
+                    }
+                    return 0;
+                });
+            return {
+                ...state,
+                recipes: sortedHealthScore
+            }
+        case GET_RECIPE_DETAILS:
+            return{
+                ...state,
+                recipesDetail: action.payload
             }
         default: 
             return state;

@@ -4,7 +4,9 @@ export const FILTER_BY_DIETS = 'FILTER_BY_DIETS';
 export const GET_RECIPES_BY_TITLE = 'GET_RECIPES_BY_TITLE';
 export const GET_DIETS = 'GET_DIETS';
 export const POST_RECIPE = 'POST_RECIPE';
-
+export const ORDER_BY_TITLE = 'ORDER_BY_TITLE';
+export const ORDER_BY_HEALTHSCORE = 'ORDER_BY_HEALTHSCORE';
+export const GET_RECIPE_DETAILS = 'GET_RECIPE_DETAILS';
 
 export function getRecipes(){
     return async function(dispatch){
@@ -60,7 +62,40 @@ export function getDiets(){
 export function postRecipe(payload){
     return async function(dispatch){
         var response = await axios.post(`http://localhost:3001/postRecipe`, payload);
-        console.log(response);
-        return response;
+        console.log("postRecipe:" + response.data);
+        return dispatch({
+            type: POST_RECIPE,
+            payload: response.data
+        })
+    }
+}
+
+export function orderByTitle(payload){
+    return{
+        type: ORDER_BY_TITLE,
+        payload
+    }
+}
+
+export function orderByHealthScore(payload){
+    return{
+        type: ORDER_BY_HEALTHSCORE,
+        payload
+    }
+}
+
+export function getDetails(id){
+    console.log("id actions: " + id);
+    return async function(dispatch){
+        try{
+            var detail = await axios.get(`http://localhost:3001/getDetails/${id}`);
+            return dispatch({
+                type: GET_RECIPE_DETAILS,
+                payload: detail.data
+            })
+        }
+        catch(error){
+            console.log(error);
+        }
     }
 }

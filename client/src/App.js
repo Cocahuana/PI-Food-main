@@ -10,9 +10,9 @@ function App() {
     <Switch>
       <div className="App">
         <Route exact path="/" component={LandingPage}/>
-        <Route path="/home" component={Home}/>
+        <Route exact path="/home" component={Home}/>
         <Route path="/postRecipe" component={RecipeCreate}/>
-        <Route path="/home/:id" component={RecipeDetail}/>
+        <Route exact path="/home/:id" component={RecipeDetail}/>
       </div>
     </Switch>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
-import { getRecipes, filterByDiets } from "../actions";
+import { getRecipes, filterByDiets, orderByTitle, orderByHealthScore } from "../actions";
 import {Link} from 'react-router-dom';
 import Card from "./Card"
 import Paginado from "./Paginado";
@@ -19,6 +19,8 @@ export default function Home() {
     const allRecipes = useSelector ((state) => state.recipes);
 
     //Vamos a setear estados locales
+    const [orden, setOrden] = useState('');
+    const [ordenHS, setOrdenHS] = useState('');
     //Arranco en la primer pagina (useState(1))
     const [currentPage, setCurrentPage] = useState(1);
     // El PI pide 9 recetas per page (useState(9))
@@ -48,9 +50,24 @@ export default function Home() {
     function handleClick(e){
         e.preventDefault();
         dispatch(getRecipes());
+        setCurrentPage(1);
     }
     function handleFilterDiets(e){
         dispatch(filterByDiets(e.target.value));
+    }
+
+    function handleSortTitle(e){
+        e.preventDefault();
+        dispatch(orderByTitle(e.target.value));
+        setCurrentPage(1);
+        setOrden(`Ordenado ${e.target.value}`)
+    }
+
+    function handleSortHealthScore(e){
+        e.preventDefault();
+        dispatch(orderByHealthScore(e.target.value));
+        setCurrentPage(1);
+        setOrdenHS(`Ordenado ${e.target.value}`)
     }
 
     //Vamos a renderizarlo
@@ -62,11 +79,11 @@ export default function Home() {
                 Volver a cargar todas las recetas
             </button>
             <div>
-                <select>
-                    <option value="ascendente">Ascendente</option>
-                    <option value="descendente">Descendente</option>
+                <select onChange={e => handleSortTitle(e)}>
+                    <option value="ascendente">A - Z</option>
+                    <option value="descendente">Z - A</option>
                 </select>
-                <select>
+                <select onChange={e => handleSortHealthScore(e)}>
                     <option value="mostHS">Most HealthScore</option>
                     <option value="lessHS">Less HealthScore</option>
                 </select>
@@ -96,11 +113,9 @@ export default function Home() {
                     currentRecipes?.map((e) =>{
                         //console.log(currentRecipes);
                         return(
-                            <Link to={"/home/" + e.id}>
-                                <div key={e.id}>
-                                    <Card key={e.id}  title={e.title} img={e.img} dietTypes={e.dietTypes}/>
-                                </div>
-                            </Link>
+                                <Link to={`/home/${e.id}`}>
+                                        <Card key={e.id}  title={e.title} img={e.img} dietTypes={e.dietTypes}/>
+                                </Link>
                         );
                     })
                 }

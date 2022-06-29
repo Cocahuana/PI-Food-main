@@ -4,26 +4,57 @@ import { useDispatch, useSelector} from 'react-redux';
 import {Link, useHistory} from 'react-router-dom';
 import { postRecipe, getDiets } from "../actions/index";
 
+function validate(input){
+    let errors = {};
+    if(!input.title){
+        errors.title = 'A title is required';
+    } else if (!input.summary || input.summary.length > 5){
+        errors.summary = 'A summary is required';
+    }
+    return errors;
+}
+
+
 export default function RecipeCreate(){
     const dispatch = useDispatch();
     const history = useHistory();
 
     const diets = useSelector((state) => state.diets);
+    const [errors, setErrors] = useState({});
 
     const [input, setInput] = useState({
         title: "",
         summary: "",
         healthScore: "",
-        steps: "",
+        analyzedInstructions: [],
         img: "",
-        diet: []
+        diet: [],
+        //Creo una variable solo para mostrar lo que busco y que no me rompa el back
+        showDiet: [],
     })
+
+    // function handleClickAdd(e){
+    //     setInput({
+    //         ...input,
+    //         steps: [...input.steps,
+    //             {
+    //                 number: input.number,
+    //                 step: input.step
+    //             }
+    //         ],
+    //         number: input.number+1
+    //     })
+    // }
 
     function handleChange(e) {
         setInput({
             ...input,
             [e.target.name] : e.target.value
         })
+        setErrors(validate({
+            ...input,
+            [e.target.name] : e.target.value
+        }))
         console.log(input);
     }
 
@@ -40,22 +71,29 @@ export default function RecipeCreate(){
             setInput({
                 ...input,
                 //Cada vez que haces un click en el select, se va concatenando en diet
-                diet: [...input.diet, e.target.value]
+                diet: [...input.diet, e.target.value],
+                //Creo una variable solo para mostrar lo que busco y que no me rompa el back
+                showDiet: [...input.diet, e.target.value],
             });
     }
 
     function handleSubmit(e){
         e.preventDefault();
-        console.log(Object.values(input));
+        console.log("submit: " + Object.values(input));
+        //Chequear si el estado de los errores está vacio, si lo está, que te deja hacer un dispatch, 
+        //sino que no te lo active al submit
+        
         dispatch(postRecipe(input));
         alert("La receta ha sido creada exitosamente!");
         setInput({
             title: "",
             summary: "",
             healthScore: "",
-            steps: "",
+            analyzedInstructions: "",
             img: "",
-            diet: []
+            diet: [],
+            //Creo una variable solo para mostrar lo que busco y que no me rompa el back
+            showDiet: [],
         });
         //history sirve para ir a otra pagina cuando termine una accion
         history.push('/home');
@@ -81,6 +119,11 @@ export default function RecipeCreate(){
                         name= "title"
                         onChange={(e) => handleChange(e)}
                     />
+                    {
+                        errors.title && (
+                            <p className="error">{errors.title}</p>
+                        )
+                    }
                 </div>
                 <div>
                     <label>Resumen:</label>
@@ -90,6 +133,11 @@ export default function RecipeCreate(){
                         name= "summary"
                         onChange={(e) => handleChange(e)}
                     />
+                    {
+                        errors.summary && (
+                            <p className="error">{errors.summary}</p>
+                        )
+                    }
                 </div>
                 <div>
                     <label>Health Score:</label>
@@ -104,7 +152,7 @@ export default function RecipeCreate(){
                     <label>Steps:</label>
                     <input
                         type= "text"
-                        value= {input.steps}
+                        value= {input.analyzedInstructions}
                         name= "steps"
                         onChange={(e) => handleChange(e)}
                     />
@@ -141,7 +189,7 @@ export default function RecipeCreate(){
                 }
                 <ul>
                     <li>
-                        {input.diet.map(e => e + ", ")}
+                        {input.showDiet.map(e => e + ", ")}
                     </li>
                 </ul>
 
