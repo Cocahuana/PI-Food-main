@@ -24,6 +24,15 @@ server.use((req, res, next) => {
 
 server.use('/', routes);
 
+//Validación del post
+server.use((error, req, res, next) => {
+  res.status(400).json({
+      status: 'error',
+      message: error.message,
+  })
+})
+
+
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   const status = err.status || 500;

@@ -1,11 +1,14 @@
 const { Router } = require('express');
 const { Recipe, Diet } = require('../db')
 const router = Router();
+const postRecipeValidations = require('../controllers/validations');
 
 router.post("/", async (req, res) => {
     // Recibe los datos recolectados desde el formulario controlado de la 
     // ruta de creación de recetas por body
     try{
+        postRecipeValidations.postRecipeValidation(req.body);
+        
         let { title, img, summary, healthScore, analyzedInstructions, diet } = req.body;
         let newRecipe = await Recipe.create({
             title,
@@ -31,5 +34,6 @@ router.post("/", async (req, res) => {
     // Crea una receta en la base de datos relacionada con sus tipos 
     // de dietas.
 })
+
 
 module.exports = router;
