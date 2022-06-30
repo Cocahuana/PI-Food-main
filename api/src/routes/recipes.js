@@ -3,11 +3,14 @@ const express = require('express');
 
 //importar controllers
 const { getAllRecipes } = require('../controllers/recipes');
+const { getRecipesValidation } = require('../controllers/validations');
+
 
 const router = express();
 
 router.get("/", async (req, res) => {
     try{
+        getRecipesValidation(req.query);
         const { title } = req.query;
         let recipesTotal = await getAllRecipes();
         if(title){

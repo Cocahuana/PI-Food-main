@@ -1,4 +1,3 @@
-
 function postRecipeValidation(data){
 
     let { title, img, summary, healthScore, analyzedInstructions, diet } = data;
@@ -51,6 +50,54 @@ function postRecipeValidation(data){
 
 
 }
+
+function getRecipeByUUIDValidation(data){
+    let {id} = data;
+
+    if(id){
+        let type = 'UUID';        
+        hasNotWhiteSpaces(type, id);
+        mustBeString(type, id);
+        mustBeUUID(type, id)
+    }
+}
+
+function getRecipesValidation(data){
+    let { title } = data;
+    
+    if(title){
+        let type = 'Title';       
+        hasNotWhiteSpaces(type, title);
+        mustBeOnlyAlphabetical(type, title);
+        mustBeString(type, title);
+        cantBeEmail(type, title);
+    }
+}
+
+// function getRecipeByIdValidation(data){
+//     let {id} = data;
+//     if(id){
+//         let type = 'id';
+//         mustBeId(type, id);
+//     }
+// }
+
+// function mustBeId(type, parameter){
+//     let idParameter = /^[0-9]+$/;
+//     if(!idParameter.test(parameter)){
+//         throw new Error (`The ${type} is: ${parameter} which is not a valid id. Example of valid id: 660306, 77017, etc`);
+//     }
+// }
+
+function mustBeUUID(type, parameter){
+    // Validate a UUID V4:
+    let UUIDParameter = /^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
+    if(!UUIDParameter.test(parameter)){
+        throw new Error (`The ${type} is not a valid UUID`);
+    }
+}
+
+
 function hasNotWhiteSpaces(type, parameter){    
     // https://regexland.com/regex-not-only-whitespace/#:~:text=A%20regex%20to%20match%20a,%2Dwhitespace%20character%20(%5CS).
     let whitespacesParameter =  /(?!^\s+$)^.*$/m
@@ -105,4 +152,6 @@ function mustBeBetweeen1To100(type, parameter){
 
 module.exports = {
     postRecipeValidation,
+    getRecipeByUUIDValidation,
+    getRecipesValidation,
 };

@@ -6,15 +6,21 @@ const {
     getApiDetail,
     getDbById, 
 } = require('../controllers/recipes');
+const {
+    getRecipeByUUIDValidation
+} = require('../controllers/validations');
+
 
 const router = express();
 
 
 router.get("/:id", async (req, res) => {
+    
     // Obtener el detalle de una receta en particular => El detalle se trae por params
-    const {id} = req.params;
     try{
+        const {id} = req.params;
         if(id.length > 16){
+            getRecipeByUUIDValidation(id);
             console.log(id)
             let recipesDbById = await getDbById(id);
             if(recipesDbById){
@@ -38,7 +44,15 @@ router.get("/:id", async (req, res) => {
             }
         }
         else{
-            const numberedId = parseInt(id); 
+            if(id){
+                let type = 'id';
+                let idParameter = /^[0-9]+$/;
+                if(!idParameter.test(id)){
+                    throw new Error (`The ${type} is: ${id} which is not a valid id. Must have only numbers. Example of valid id: 660306, 77017, etc`);
+                }
+            }
+            //
+            let numberedId = parseInt(id);
             let detailedRecipe = await getApiDetail(numberedId);
             if(detailedRecipe){
                 let recipeDetailed = {
@@ -67,5 +81,6 @@ router.get("/:id", async (req, res) => {
     
     // Incluir los tipos de dieta asociados
 })
+
 
 module.exports = router;
