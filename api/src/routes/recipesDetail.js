@@ -17,8 +17,8 @@ const router = express();
 router.get("/:id", async (req, res) => {
     
     // Obtener el detalle de una receta en particular => El detalle se trae por params
+    const {id} = req.params;
     try{
-        const {id} = req.params;
         if(id.length > 16){
             getRecipeByUUIDValidation(id);
             console.log(id)
@@ -30,14 +30,8 @@ router.get("/:id", async (req, res) => {
                     img: recipesDbById.img,
                     healthScore: recipesDbById.healthScore,
                     dietTypes: recipesDbById.diets.map(e => e.dietName),
-                    dishTypes: recipesDbById.dishTypes,
                     summary: recipesDbById.summary,
-                    analyzedInstructions: recipesDbById.analyzedInstructions.map(e => {
-                        return {
-                            number: e.number,
-                            step: e.step
-                        }
-                    })
+                    stepFromDb: recipesDbById.stepFromDb,
                 }
                 console.log(obj);
                 res.status(200).send(obj);
@@ -51,7 +45,7 @@ router.get("/:id", async (req, res) => {
                     throw new Error (`The ${type} is: ${id} which is not a valid id. Must have only numbers. Example of valid id: 660306, 77017, etc`);
                 }
             }
-            //
+            
             let numberedId = parseInt(id);
             let detailedRecipe = await getApiDetail(numberedId);
             if(detailedRecipe){
@@ -62,7 +56,6 @@ router.get("/:id", async (req, res) => {
                     healthScore: detailedRecipe.healthScore,
                     //DietTypes es un arreglo de Strings
                     dietTypes: detailedRecipe.dietTypes ? detailedRecipe.dietTypes : detailedRecipe.diets.map(e => e),
-                    dishTypes: detailedRecipe.dishTypes,
                     summary: detailedRecipe.summary,
                     analyzedInstructions: detailedRecipe.analyzedInstructions[0]?.steps.map(e => {
                         return {

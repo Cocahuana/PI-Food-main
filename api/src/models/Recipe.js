@@ -29,8 +29,8 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-    analyzedInstructions:{
-      type: DataTypes.ARRAY(DataTypes.JSON),
+    stepFromDb:{
+      type: DataTypes.STRING,
       allowNull: true,
     },
     //Separamos lo recibido de la API de lo creado en la BD

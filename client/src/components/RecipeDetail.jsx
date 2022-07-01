@@ -21,12 +21,14 @@ export default function RecipeDetail(props){
             <img src={myRecipe.img} alt="img not found" width="400px" height="500px"/>
 
             <h3>Health Score: {myRecipe.healthScore}</h3>
-            <h3>Tipo de plato: {myRecipe.dishTypes}</h3>
             <h3>Tipo de dieta: {myRecipe.dietTypes}</h3>
-            <p>Summary: {myRecipe.summary}</p>
+            {/*inner atribute for html dangerouslySetInnerHTML, is a property that you can use on HTML elements in a React application to programmatically set their content*/}
+            <p><div dangerouslySetInnerHTML={{ __html: myRecipe.summary }}/></p>
             <h3 className="texts">Steps: </h3>
+                <ul><li>{myRecipe.stepFromDb}</li></ul>
                 <ul className="steps">
                     {
+                        
                         Array.isArray(myRecipe.analyzedInstructions) ? 
                         myRecipe.analyzedInstructions.map(e => {
                             return(
@@ -36,7 +38,9 @@ export default function RecipeDetail(props){
                                 </div>
                                 )
                         }) :
-                        <li>{myRecipe.steps}</li>
+                        //Si no tengo analyzedInstructions, renderizo los que contengan steps
+                        //myRecipe.steps
+                        <li>Steps were not defined</li>
                     }
                 </ul>
             <Link to= '/home'>

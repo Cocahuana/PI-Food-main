@@ -10,30 +10,38 @@ export default function RecipeCreate(){
     const dispatch = useDispatch();
     const history = useHistory();
 
-    //Necesito renderizar las dietas
-    useEffect(() => {
-        dispatch(getDiets());
-    }, []);
-
     const diets = useSelector((state) => state.diets);
     const [errors, setErrors] = useState({});
 
     const [input, setInput] = useState({
         title: "",
         summary: "",
-        healthScore: 50,
-        stepFromDb: "",
+        healthScore: "",
+        analyzedInstructions: "",
         img: "",
         diet: [],
         //Creo una variable solo para mostrar lo que busco y que no me rompa el back
         //showDiet: [],
     })
 
+    // function handleClickAdd(e){
+    //     setInput({
+    //         ...input,
+    //         steps: [...input.steps,
+    //             {
+    //                 number: input.number,
+    //                 step: input.step
+    //             }
+    //         ],
+    //         number: input.number+1
+    //     })
+    // }
+
     function handleChange(e) {
         let { name, value } = e.target;
         setInput({
             ...input,
-            [name] : value,
+            [name] : value
         })
         setErrors(validate({
             ...input,
@@ -43,63 +51,43 @@ export default function RecipeCreate(){
     }
 
     function handleSelect(e){
-        let { value } = e.target;
             setInput({
                 ...input,
                 //Cada vez que haces un click en el select, se va concatenando en diet
-                //diet: [...input.diet, e.target.value],
-                diet : [...input.diet, value],
+                diet: [...input.diet, e.target.value],
                 //Creo una variable solo para mostrar lo que busco y que no me rompa el back
                 //showDiet: [...input.diet, e.target.value],
             });
     }
 
-    // function handleChangeCheckbox(e){        
-    //     let { value, checked } = e.target;
-    //     if(checked){
-    //         setInput({
-    //             ...input,
-    //             //Cada vez que haces un click en el select, se va concatenando en diet
-    //             //diet: [...input.diet, e.target.value],
-    //             diet : [...input.diet, value],
-    //             //Creo una variable solo para mostrar lo que busco y que no me rompa el back
-    //             //showDiet: [...input.diet, e.target.value],
-    //         });
-            
-    //     }   
-    // }
-
-
     function handleSubmit(e){
         e.preventDefault();
-
-         if (Object.values(errors).length > 0) {
-             alert("Please complete the information required");
-         } else if (
-            input.title === '' ||
-            input.summary === '' ||
-            input.healthScore < 0 && input.healthScore > 100 ||
-            input.stepFromDb === '' ||
-            input.img === '' ||
-            input.diet.length === 0) {
-            alert("Please complete the form");}
-        else {
-            dispatch(postRecipe(input));
-            alert('New recipe added successfully!')
-            setInput({
-                title: '',
-                summary: '',
-                healthScore: 50,
-                stepFromDb: '',
-                diet: []
-            });
-            history.push('/home')
-        }
+        console.log("submit: " + Object.values(input));
+        //Chequear si el estado de los errores está vacio, si lo está, que te deja hacer un dispatch, 
+        //sino que no te lo active al submit
+        
+        dispatch(postRecipe(input));
+        alert("La receta ha sido creada exitosamente!");
+        setInput({
+            title: "",
+            summary: "",
+            healthScore: "",
+            analyzedInstructions: "",
+            img: "",
+            diet: [],
+            //Creo una variable solo para mostrar lo que busco y que no me rompa el back
+            //showDiet: [],
+        });
+        //history sirve para ir a otra pagina cuando termine una accion
+        history.push('/home');
     }
 
     //useHistory es un metodo del router que lo que hace es redirigirme a la ruta que yo le diga
 
-    
+    //Necesito renderizar las dietas
+    useEffect(() => {
+        dispatch(getDiets());
+    }, [dispatch]);
 
     return (
         <div>
@@ -114,7 +102,6 @@ export default function RecipeCreate(){
                         name= "title"
                         placeholder="Fried Chicken..."
                         onChange={(e) => handleChange(e)}
-                        required
                     />
                     {
                         errors.title && (
@@ -130,7 +117,6 @@ export default function RecipeCreate(){
                         name= "summary"
                         placeholder="A very juicy chicken for all the family..."
                         onChange={(e) => handleChange(e)}
-                        required
                     />
                     {
                         errors.summary && (
@@ -157,10 +143,9 @@ export default function RecipeCreate(){
                     <label>Steps:</label>
                     <input
                         type= "text"
-                        value= {input.stepFromDb}
-                        name= "stepFromDb"
+                        value= {input.analyzedInstructions}
+                        name= "analyzedInstructions"
                         onChange={(e) => handleChange(e)}
-                        required
                     />
                 </div>
                 <div>
@@ -171,24 +156,8 @@ export default function RecipeCreate(){
                         name= "img"
                         placeholder="http://..."
                         onChange={(e) => handleChange(e)}
-                        required
                     />
                 </div>
-                {
-                        errors.img && (
-                            <p className="error">{errors.img}</p>
-                        )
-                    }
-                <div>
-                {/* {
-                    diets.map(e => <div>
-                                        <label>{e.dietName}</label>
-                                            <input type='checkbox' value={e.dietName} name={e.dietName} onChange={(e) => handleChangeCheckbox(e)} />
-                                    </div>)
-
-                } */}
-                </div>
-                
                 <select onChange={(e) => handleSelect(e)}>
                     {
                         diets?.map((e) => {

@@ -10,7 +10,7 @@ const router = express();
 
 router.get("/", async (req, res) => {
     try{
-        getRecipesValidation(req.query);
+        //getRecipesValidation(req.query);
         const { title } = req.query;
         let recipesTotal = await getAllRecipes();
         if(title){
@@ -36,7 +36,7 @@ router.get("/", async (req, res) => {
             return res.status(404).send("No se encontró la receta"); 
         }
         // Si no se filtra la receta (valor por default al cargar la pagina web), traeme todas
-        else{
+        else{            
             let recipesFiltered = recipesTotal.map(e => {
                 return {
                     id: e.id,

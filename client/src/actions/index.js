@@ -61,12 +61,18 @@ export function getDiets(){
 
 export function postRecipe(payload){
     return async function(dispatch){
-        var response = await axios.post(`http://localhost:3001/postRecipe`, payload);
-        console.log("postRecipe:" + response.data);
-        return dispatch({
-            type: POST_RECIPE,
-            payload: response.data
-        })
+        try{
+            var response = await axios.post(`http://localhost:3001/postRecipe`, payload);
+            //console.log("postRecipe:" + response.data);
+            return dispatch({
+                type: POST_RECIPE,
+                payload: response.data
+            })
+        }
+        catch(error){
+            console.log(error);
+        }
+        
     }
 }
 

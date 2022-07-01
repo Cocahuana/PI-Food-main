@@ -9,13 +9,13 @@ router.post("/", async (req, res) => {
     try{
         postRecipeValidations.postRecipeValidation(req.body);
         
-        let { title, img, summary, healthScore, analyzedInstructions, diet } = req.body;
+        let { title, img, summary, healthScore, stepFromDb, diet } = req.body;
         let newRecipe = await Recipe.create({
             title,
             img,
             summary,
             healthScore,
-            analyzedInstructions,
+            stepFromDb,
         });
 
         console.log("dietTypes: " + diet);
