@@ -26,7 +26,7 @@ function postRecipeValidation(data){
     if(healthScore){
         let type = 'Health Score';
         hasNotWhiteSpaces(type, healthScore);
-        mustBeANumber(type, healthScore);
+        //mustBeANumber(type, healthScore);
         cantBeEmail(type, healthScore);
         mustBeBetweeen1To100(type, healthScore)
     } else mustBeBetweeen1To100('Health Score', healthScore);

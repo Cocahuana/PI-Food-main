@@ -21,7 +21,7 @@ export default function RecipeCreate(){
     const [input, setInput] = useState({
         title: "",
         summary: "",
-        healthScore: 50,
+        healthScore: '',
         stepFromDb: "",
         img: "",
         diet: [],
@@ -89,7 +89,7 @@ export default function RecipeCreate(){
             setInput({
                 title: '',
                 summary: '',
-                healthScore: 50,
+                healthScore: '',
                 stepFromDb: '',
                 diet: []
             });

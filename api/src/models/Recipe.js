@@ -14,15 +14,15 @@ module.exports = (sequelize) => {
       primaryKey: true,
     },
     title: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(40),
       allowNull: false,
     },
     summary:{
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING(800),
       allowNull: false,
     },
     img:{
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(500),
       allowNull: false,
     },
     healthScore:{
@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     stepFromDb:{
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1024),
       allowNull: true,
     },
     //Separamos lo recibido de la API de lo creado en la BD
