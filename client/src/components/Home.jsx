@@ -1,4 +1,5 @@
 import React from "react";
+import './home.css'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
 import { getRecipes, filterByDiets, orderByTitle, orderByHealthScore } from "../actions";
@@ -72,7 +73,7 @@ export default function Home() {
 
     //Vamos a renderizarlo
     return (
-        <div>
+        <div className="home">
             <Link to='/postRecipe'>Crear Receta</Link>
             <h1>Titulo de la pagina</h1>
             <button onClick={e => {handleClick(e)}}>
