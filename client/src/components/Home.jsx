@@ -76,22 +76,33 @@ export default function Home() {
         <div className="home grid-container">
             <div className="home-filters">
                 <h1 className="home-filters__title">FOOD PI</h1>
+                
+            </div>
+            <div className="home-paginado">
+                <Paginado
+                    recipesPerPage={recipesPerPage}
+                    allRecipes={allRecipes.length}
+                    paginado= {paginado}
+                />
+            </div>
+            <div className="home-searchbar">
+                
+                <h3 className="searchbar-h3-1">Sort in Alphabetical order</h3>
                 <div className="filter-a-z">
-                    <h3>Sort in Alphabetical order</h3>
                     <select onChange={e => handleSortTitle(e)}>
                         <option value="ascendente">A - Z</option>
                         <option value="descendente">Z - A</option>
                     </select>
                 </div>
+                <h3 className="searchbar-h3-2">Order by Health Score</h3>
                 <div className="filter-healthScore">
-                    <h3>Order by Health Score</h3>
                     <select onChange={e => handleSortHealthScore(e)}>
                         <option value="mostHS">Most HealthScore</option>
                         <option value="lessHS">Less HealthScore</option>
                     </select>
                 </div>
+                <h3 className="searchbar-h3-3">Ordey by Diet Type</h3>
                 <div className="filter-diet">
-                    <h3>Ordey by Diet Type</h3>
                     <select onClick={e => {handleFilterDiets(e)}}>
                         <option value='All'>All</option>
                         <option value='gluten free'>Gluten Free</option>
@@ -107,15 +118,9 @@ export default function Home() {
                         <option value='whole 30'>Whole 30</option>
                     </select>
                 </div>
-            </div>
-            <div className="home-paginado">
-                <Paginado
-                    recipesPerPage={recipesPerPage}
-                    allRecipes={allRecipes.length}
-                    paginado= {paginado}
-                />
-            </div>
-            <div className="home-searchbar">
+
+
+
                 <div className="home-searchbar__searchbar">
                     <SearchBar/>
                 </div>
