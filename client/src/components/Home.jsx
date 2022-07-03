@@ -132,11 +132,13 @@ export default function Home() {
                     </div>
                 </div>
                 <div className="home-searchbar__createRecipe">
-                    <div className="flex justify-center align-center w100 h100">
-                        <button className="searchbar__reloadRecipesCTA">
-                            <Link to='/postRecipe'> Create a Recipe </Link>
-                        </button>
-                    </div>
+                    <Link to='/postRecipe'>
+                        <div className="flex justify-center align-center w100 h100">
+                            <button className="searchbar__reloadRecipesCTA">
+                                Create a Recipe 
+                            </button>
+                        </div>
+                    </Link>
                 </div>
             </div>
             <div className="home-cards">
@@ -146,9 +148,7 @@ export default function Home() {
                     currentRecipes?.map((e) =>{
                         //console.log(currentRecipes);
                         return(
-                                <Link to={`/home/${e.id}`}>
-                                        <Card key={e.id}  title={e.title} img={e.img} dietTypes={e.dietTypes}/>
-                                </Link>
+                            <Card key={e.id} id={e.id}  title={e.title} img={e.img} dietTypes={e.dietTypes}/>
                         );
                     })
                 }

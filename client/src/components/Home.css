@@ -47,7 +47,7 @@
     }
 
     .home-filters__title{
-        grid-column: 1 / 4;
+        grid-column: 1 / -1;
         grid-row: 1 / -1;
         font-size: 5.5rem;
         display: flex;
@@ -195,6 +195,10 @@
         grid-column: 10 / -1;
         grid-row: 9 / -1;
     }
+        .createRecipe{
+            width: 90%;
+            height: 100%;
+        }
 
 .home-paginado{   
     /* background-color: blueviolet; */
@@ -207,14 +211,11 @@
     grid-column: 1 / -1;
     grid-row: 6 / 12;
     display: grid;
-    gap: 1rem;
+    gap: 2rem;
     grid-template-columns: repeat(3, auto);
     grid-template-rows: repeat(3, auto);
     padding: 2rem;
     background-color: rgba(0, 0, 0, 0.5);
-    
+    border-bottom: 2px solid rgba(50, 50, 50, 0.5);
 }
 
-.home-cards h3{
-    color: var(--clr-light);
-}

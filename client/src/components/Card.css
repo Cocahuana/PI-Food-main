@@ -1,12 +1,115 @@
 .Card{
+    width: 100%;
+    height: 100%;
     grid-column: auto;
     grid-row: auto;
-    /*Editar de aca para abajo una vez terminado el resto*/
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
     justify-content: center;
     text-align: center;
     align-items: center;
-    background-color: rgba(255, 0, 0, 0.5);
+    /*Editar de aca para abajo una vez terminado el resto*/
+    /*  */
+    /* background-color: rgba(var(--bg-darkRGBA)); */
+    /* background-color: rgba(255, 0, 0, 0.5); */    
+    border: 2px solid rgba(50, 50, 50, 0.5);
+    border-radius: 0rem 2rem 0rem 2rem;
+    padding: 1rem;
+}
+
+.card-container{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 1rem;
+    width: 100%;
+    align-items: center;
+    height: 40rem;
+    text-align: center;
+}
+
+.line{
+    width: 30%;
+    height: 1px;
+    background-color: var(--border-yellow);
+    margin: 0.5rem 0;
+}
+
+h3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 1.4rem;
+    color: var(--clr-light);
+    font-weight: 900;
+    letter-spacing: 0.15rem;
+}
+
+
+.card-img{
+    width: 17rem;
+    height: 17rem;
+    filter: opacity(80%);
+    border-radius: 50%;
+    border: 2px solid var(--border-yellow);
+    filter: drop-shadow(0.2rem 0.3rem 0.5rem rgba(100, 100, 100, 0.5));
+}
+
+.card-CTA-container{
+    width: 100%;
+    height: auto;
+}
+
+.card-CTA{
+    color: rgba(var(--bg-darkRGBA));
+    border-radius: 1rem;
+    background-color: var(--border-yellow);
+    transition: 1s;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.2rem;
+    width: 30%;
+    height: 3rem;
+}
+
+.card-CTA:hover{
+    /* color: rgba(0, 0, 0, 1); */
+    width: 30%;
+    height: 3rem;
+    background-color: beige;
+    color:  var(--border-yellow);
+    border-radius: 1rem;
+    text-align: center;
+    font-size: 1rem;
+    color: var(--clr-light);
+    font-weight: 900;
+    letter-spacing: 0.15rem;
+}
+
+.card-diets-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 20%;
+    /* border-radius: 1rem; */
+}
+
+.diets-h5{
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px solid rgba(50, 50, 50, 0.5);
+    border-radius: 2rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+    text-align: center;
+    padding: 0.4rem;
+    margin: 0.4rem;
 }
