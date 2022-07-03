@@ -8,6 +8,8 @@
   /* Colors */
   /*bg*/
   --clr-dark: #001219;
+  --clr-black: 10, 10, 10;
+  --bg-darkRGBA: 0, 0, 0, 0.5;
   /*Titles*/
   --clr-light: #e9d8a6;
   /*borders*/
@@ -33,12 +35,97 @@
 }
 
 body {
-  /*Se puede reemplazar por una imagen de fondo*/
-  min-height: 100vh;
-  width: 100%;
-  background-color: red;
+  /*Se puede reemplazar por una imagen de fondo*/ 
+  /*background: url("./assets/images/soup.jpg") no-repeat 50% 50%;*/
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 li{
   list-style: none;
+}
+
+a:link, a:visited, a:active {
+  text-decoration:none;
+}
+
+button:link, button:visited, button:active{
+  text-decoration:none;
+}
+
+select:hover{
+  cursor: pointer;
+}
+
+input:hover{
+  cursor: pointer;
+}
+
+button:hover{
+  cursor: pointer;
+}
+
+select, input{
+  color: beige;
+  border: 3px solid var(--border-yellow);
+  border-radius: 1rem;
+  background-color: rgba(var(--bg-darkRGBA));             
+  transition: 1s;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.2rem; 
+}
+
+select:hover, input:hover{
+  color: rgb(var(--clr-black));
+  border: 3px solid var(--border-yellow);
+  border-radius: 1rem;
+  background-color:beige;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.2rem; 
+}
+
+select:focus-visible, input:focus-visible{
+  outline: none;
+  border: 3px solid var(--border-yellow);
+  border-radius: 1rem;
+  width: 80%;
+  height: 2.5rem;
+  color: var(--clr-black);
+  background-color: beige;  
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.2rem; 
+}
+
+select option {
+  color: rgba(0, 0, 0, 1);
+  background-color: beige;
+}
+
+.flex{
+  display: flex;
+}
+
+.justify-center{
+  justify-content: center;
+}
+
+.align-center{
+  align-items: center;
+}
+
+.p1{
+  padding: 1rem;
+}
+
+.w100{
+  width: 100%;
+}
+
+.h100{
+  height: 100%;
 }

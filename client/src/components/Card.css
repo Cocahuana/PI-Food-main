@@ -1,0 +1,12 @@
+.Card{
+    grid-column: auto;
+    grid-row: auto;
+    /*Editar de aca para abajo una vez terminado el resto*/
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    background-color: rgba(255, 0, 0, 0.5);
+}

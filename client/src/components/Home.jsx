@@ -1,5 +1,5 @@
 import React from "react";
-import './home.css'
+import './Home.css'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
 import { getRecipes, filterByDiets, orderByTitle, orderByHealthScore } from "../actions";
@@ -73,41 +73,68 @@ export default function Home() {
 
     //Vamos a renderizarlo
     return (
-        <div className="home">
-            <Link to='/postRecipe'>Crear Receta</Link>
-            <h1>Titulo de la pagina</h1>
-            <button onClick={e => {handleClick(e)}}>
-                Volver a cargar todas las recetas
-            </button>
-            <div>
-                <select onChange={e => handleSortTitle(e)}>
-                    <option value="ascendente">A - Z</option>
-                    <option value="descendente">Z - A</option>
-                </select>
-                <select onChange={e => handleSortHealthScore(e)}>
-                    <option value="mostHS">Most HealthScore</option>
-                    <option value="lessHS">Less HealthScore</option>
-                </select>
-                <select onClick={e => {handleFilterDiets(e)}}>
-                    <option value='All'>All</option>
-                    <option value='gluten free'>Gluten Free</option>
-                    <option value='ketogenic'>Ketogenic</option>
-                    <option value='vegetarian'>Vegetarian</option>
-                    <option value='lacto vegetarian'>Lacto Vegetarian</option>
-                    <option value='ovo vegetarian'>Ovo Vegetarian</option>
-                    <option value='vegan'>Vegan</option>
-                    <option value='pescetarian'>Pescetarian</option>
-                    <option value='paleo'>Paleo</option>
-                    <option value='primal'>Primal</option>
-                    <option value='low fodmap'>Low Fodmap</option>
-                    <option value='whole 30'>Whole 30</option>
-                </select>
+        <div className="home grid-container">
+            <div className="home-filters">
+                <h1 className="home-filters__title">FOOD PI</h1>
+                <div className="filter-a-z">
+                    <h3>Sort in Alphabetical order</h3>
+                    <select onChange={e => handleSortTitle(e)}>
+                        <option value="ascendente">A - Z</option>
+                        <option value="descendente">Z - A</option>
+                    </select>
+                </div>
+                <div className="filter-healthScore">
+                    <h3>Order by Health Score</h3>
+                    <select onChange={e => handleSortHealthScore(e)}>
+                        <option value="mostHS">Most HealthScore</option>
+                        <option value="lessHS">Less HealthScore</option>
+                    </select>
+                </div>
+                <div className="filter-diet">
+                    <h3>Ordey by Diet Type</h3>
+                    <select onClick={e => {handleFilterDiets(e)}}>
+                        <option value='All'>All</option>
+                        <option value='gluten free'>Gluten Free</option>
+                        <option value='ketogenic'>Ketogenic</option>
+                        <option value='vegetarian'>Vegetarian</option>
+                        <option value='lacto vegetarian'>Lacto Vegetarian</option>
+                        <option value='ovo vegetarian'>Ovo Vegetarian</option>
+                        <option value='vegan'>Vegan</option>
+                        <option value='pescetarian'>Pescetarian</option>
+                        <option value='paleo'>Paleo</option>
+                        <option value='primal'>Primal</option>
+                        <option value='low fodmap'>Low Fodmap</option>
+                        <option value='whole 30'>Whole 30</option>
+                    </select>
+                </div>
+            </div>
+            <div className="home-paginado">
                 <Paginado
                     recipesPerPage={recipesPerPage}
                     allRecipes={allRecipes.length}
                     paginado= {paginado}
                 />
-                <SearchBar/>
+            </div>
+            <div className="home-searchbar">
+                <div className="home-searchbar__searchbar">
+                    <SearchBar/>
+                </div>
+                <div className="home-searchbar__reloadRecipes">
+                    <div className="flex justify-center align-center w100 h100">
+                        <button className="searchbar__reloadRecipesCTA" onClick={e => {handleClick(e)}}>
+                            Reload Recipes
+                        </button>
+                    </div>
+                </div>
+                <div className="home-searchbar__createRecipe">
+                    <div className="flex justify-center align-center w100 h100">
+                        <button className="searchbar__reloadRecipesCTA">
+                            <Link to='/postRecipe'> Create a Recipe </Link>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div className="home-cards">
                 {
                     //Renderizo el componente card
                     //Primero pregunto si existe
@@ -120,7 +147,6 @@ export default function Home() {
                         );
                     })
                 }
-                
             </div>
         </div>
     )

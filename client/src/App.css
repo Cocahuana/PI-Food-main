@@ -1,13 +1,11 @@
 .App{
-  background-color: var(--clr-dark);
   min-height: 100vh;
-  width: 100%;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-gap: 1rem;
 }
 
-.App h1,h2,h3,h4,h5{
+.App h2,h4,h5{
   color: var(--clr-light);
 }
 

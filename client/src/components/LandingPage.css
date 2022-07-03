@@ -5,10 +5,8 @@
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(6, 1fr);
     grid-gap: 1rem;
-    background-image: url("../assets/images/2.jpg");
-    background-size: 60% 100vh;
-    background-repeat: no-repeat;
-    width: 100%;
+    background: url("../assets/images/2.jpg") no-repeat 75% 75%;
+    background-size: cover;
     height: 100vh;
 }
 

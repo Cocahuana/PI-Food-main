@@ -8,8 +8,8 @@ export default function LandingPage(){
         <div className="LandingPage">
             <div className="home-hero">
                 <div className="home-text">
-                    <p className="home-text__text">Hi</p>
-                    <p className="home-text__text2">there!</p>
+                    <p className="home-text__text">HI</p>
+                    <p className="home-text__text2">THERE!</p>
                     <h1 className="home-text__title">Looking for juicy and helthy recipes?</h1>
                     <div className="home-text__link">
                         <Link to='/home'>

@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getRecipesByTitle } from "../actions";
+import "./SearchBar.css";
 
 export default function SearchBar (){
     const dispatch = useDispatch();
@@ -19,13 +20,14 @@ export default function SearchBar (){
     }
     //para borrar el input = value={title}
     return (
-        <div>
-            <input 
+        <div className="flex space-evenly align-center searchbar-div">
+            <input
+                className="searchbar-input" 
                 type='text' 
-                placeholder="Buscar..."
+                placeholder="Homemade Garlic..."
                 onChange={(e) => handleInputChange(e)}
             />
-            <button type='submit' onClick={(e) => handleSubmit(e)}>Buscar</button>
+            <button className="searchbar-button" type='submit' onClick={(e) => handleSubmit(e)}>SEARCH</button>
         </div>
     )
 }
