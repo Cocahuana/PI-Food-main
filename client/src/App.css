@@ -3,12 +3,13 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-gap: 1rem;
+  
 }
 
 .App h2,h4,h5{
   color: var(--clr-light);
 }
-
+/* 
 .App p{
   color: var(--clr-white);
-}
+} */

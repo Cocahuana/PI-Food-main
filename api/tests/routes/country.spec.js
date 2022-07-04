@@ -61,12 +61,21 @@ describe('Recipe routes', () => {
   describe('POST /postRecipe', () => {  
     it('should reply the POST method /postRecipe whith code 500 if title and summary is not sent', async () => {
       const res = await agent.post('/postRecipe').send({});
-      expect(res.statusCode).to.equal(500);
+      expect(res.statusCode).to.equal(400);
       const res1 = await agent.post('/postRecipe').send({title: 'Sopa casera de la abuela'});
-      expect(res1.statusCode).to.equal(500);
+      expect(res1.statusCode).to.equal(400);
     });  
-    it('should reply the POST method /postRecipe with status code 200 if title, summary and dietTypes is sent', async () => {
-      const res2 = await agent.post('/postRecipe').send({title: 'Sopa casera de la abuela', summary: 'Es la sopa mas nostalgica', diet: 'paleo'});
+    it('should reply the POST method /postRecipe with status code 200 if al inputs has something when it is sent', async () => {
+      const res2 = await agent.post('/postRecipe').send(
+        {
+          title: 'Sopa casera de la abuela', 
+          summary: 'Es la sopa mas nostalgica', 
+          diet: ["paleo"],
+          healthScore: 35,
+          img: "https://www.paulinacocina.net/wp-content/uploads/2022/06/receta-de-chinchulines-a-la-parrilla.jpg",
+          steps: "Soy un paso a paso",
+        
+        });
       expect(res2.statusCode).to.equal(200);
     })  
   });

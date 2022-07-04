@@ -1,4 +1,5 @@
 import React from "react";
+import './Paginado.css'
 // Declaro el paginado y me traigo los estados locales
 export default function Paginado ({currentPage, recipesPerPage, allRecipes, paginado}){
     const pageNumbers = [];
