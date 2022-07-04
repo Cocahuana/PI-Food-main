@@ -1,6 +1,6 @@
 import React from "react";
 // Declaro el paginado y me traigo los estados locales
-export default function Paginado ({recipesPerPage, allRecipes, paginado}){
+export default function Paginado ({currentPage, recipesPerPage, allRecipes, paginado}){
     const pageNumbers = [];
     //Voy a recorrer un arreglo en el que voy a dividir todas las recetas
     // por paginado así creo varias paginas.
@@ -10,15 +10,20 @@ export default function Paginado ({recipesPerPage, allRecipes, paginado}){
         //Pusheo en el arreglo la cantidad total de paginas que va a tener la app
         pageNumbers.push(i+1);
     }
+    console.log("currenPage: " + currentPage);
     return(
-        <nav>
-            <ul className="paginado">
+        <nav className="paginado__nav">
+            <ul className="paginado__ul">
                 {
                     //Si tengo el paginado, devolveme con un numerito sus respectivas paginas y hacelas linkeables
-                    pageNumbers &&
                     pageNumbers.map(number => (
-                            <li className="number" key={number}>
-                                <a onClick={() => paginado(number)}>{number}</a>
+                            currentPage === number?
+                            <li className="selected" key={number}>
+                                {<a onClick={() => paginado(number)}>{number}</a>}
+                            </li>
+                            :
+                            <li className="paginado__li" key={number}>
+                                {<a onClick={() => paginado(number)}>{number}</a>}
                             </li>
                     ))
                 }
@@ -26,3 +31,7 @@ export default function Paginado ({recipesPerPage, allRecipes, paginado}){
         </nav>
     )
 }
+
+// currentPage === number?
+// <a className="selected" onClick={() => paginado(number)}>{number}</a>:
+// <a onClick={() => paginado(number)}>{number}</a>

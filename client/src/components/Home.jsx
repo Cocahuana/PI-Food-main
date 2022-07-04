@@ -34,9 +34,9 @@ export default function Home() {
     //Page 2: 11---------20
     //Page 3: 21 --------- 30 
 
-    const paginado = (pageNumber) => {
+   const paginado = (pageNumber) => {
         setCurrentPage(pageNumber);
-    }
+    } 
 
     //Traer del estado las recipes cuando el estado se monta
     //useEffect es como el componentDidMount
@@ -79,11 +79,14 @@ export default function Home() {
                 
             </div>
             <div className="home-paginado">
-                <Paginado
-                    recipesPerPage={recipesPerPage}
-                    allRecipes={allRecipes.length}
-                    paginado= {paginado}
-                />
+                <div className="home-painado-container">
+                    <Paginado
+                        recipesPerPage={recipesPerPage}
+                        allRecipes={allRecipes.length}
+                        paginado= {paginado}
+                        currentPage={currentPage}
+                    />
+                </div>
             </div>
             <div className="home-searchbar">
                 
