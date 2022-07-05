@@ -54,6 +54,7 @@ export default function Home() {
         setCurrentPage(1);
     }
     function handleFilterDiets(e){
+        //Revisar
         dispatch(filterByDiets(e.target.value));
     }
 
