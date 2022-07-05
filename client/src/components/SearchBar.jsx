@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { getRecipesByTitle } from "../actions";
 import "./SearchBar.css";
 
-export default function SearchBar (){
+export default function SearchBar ({setCurrentPage}){
     const dispatch = useDispatch();
     const [title, setTitle] = useState("");
 
@@ -16,7 +16,8 @@ export default function SearchBar (){
 
     function handleSubmit(e){
         e.preventDefault();
-        dispatch(getRecipesByTitle(title))
+        dispatch(getRecipesByTitle(title));
+        setCurrentPage(1);
     }
     //para borrar el input = value={title}
     return (

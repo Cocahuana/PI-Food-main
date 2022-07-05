@@ -56,6 +56,7 @@ export default function Home() {
     function handleFilterDiets(e){
         //Revisar
         dispatch(filterByDiets(e.target.value));
+        setCurrentPage(1);
     }
 
     function handleSortTitle(e){
@@ -126,7 +127,7 @@ export default function Home() {
 
 
                 <div className="home-searchbar__searchbar">
-                    <SearchBar/>
+                    <SearchBar setCurrentPage={setCurrentPage}/>
                 </div>
                 <div className="home-searchbar__reloadRecipes">
                     <div className="flex justify-center align-center w100 h100">
