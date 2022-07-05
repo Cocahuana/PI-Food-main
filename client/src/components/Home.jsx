@@ -108,7 +108,7 @@ export default function Home() {
                 </div>
                 <h3 className="searchbar-h3-3">Ordey by Diet Type</h3>
                 <div className="filter-diet">
-                    <select onClick={e => {handleFilterDiets(e)}}>
+                    <select onChange={e => {handleFilterDiets(e)}}>
                         <option value='All'>All</option>
                         <option value='gluten free'>Gluten Free</option>
                         <option value='ketogenic'>Ketogenic</option>
