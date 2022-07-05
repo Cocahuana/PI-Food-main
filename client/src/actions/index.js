@@ -14,7 +14,7 @@ export function getRecipes(){
             
         });
         
-        console.log(Object.values(json.data));
+        // console.log(Object.values(json.data));
 
         return dispatch({
             type: GET_RECIPES,
@@ -24,7 +24,7 @@ export function getRecipes(){
 }
 
 export function filterByDiets(payload){
-    console.log(payload); //All
+    // console.log(payload); //All
     return{
         type: FILTER_BY_DIETS,
         payload
@@ -91,7 +91,7 @@ export function orderByHealthScore(payload){
 }
 
 export function getDetails(id){
-    console.log("id actions: " + id);
+    // console.log("id actions: " + id);
     return async function(dispatch){
         try{
             var detail = await axios.get(`http://localhost:3001/getDetails/${id}`);

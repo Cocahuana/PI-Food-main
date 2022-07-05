@@ -62,7 +62,8 @@
                     }
 
                     .detail-healthScore{
-                        width: 5%;
+                        min-width: 8%;
+                        max-width: 10%;
                         height: 50%;
                         display: flex;
                         justify-content: center;

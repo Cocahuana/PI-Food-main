@@ -12,11 +12,6 @@ export default function Paginado ({currentPage, recipesPerPage, allRecipes, pagi
         //Pusheo en el arreglo la cantidad total de paginas que va a tener la app
         pageNumbers.push(i+1);
     }
-    console.log("currentPage: " + currentPage);
-    console.log("recipesPerPage: " + recipesPerPage);
-    console.log("allRecipes: " + allRecipes);
-    console.log("paginado: " + paginado);
-    console.log("page numbers: " + pageNumbers);
     return(
         <nav className="paginado__nav">
             <ul className="paginado__ul">
