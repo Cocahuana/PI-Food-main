@@ -6,12 +6,17 @@ export default function Paginado ({currentPage, recipesPerPage, allRecipes, pagi
     //Voy a recorrer un arreglo en el que voy a dividir todas las recetas
     // por paginado así creo varias paginas.
     // Redondeo para arriba porque si me no llegan a 9 los paginados, 
-    // quiero que me traiga en la ultima pagina lo que sobre
+    // quiero que me traiga en la ultima pagina lo que sobre    
+        
     for(let i = 0; i < Math.ceil(allRecipes / recipesPerPage); i++){
         //Pusheo en el arreglo la cantidad total de paginas que va a tener la app
         pageNumbers.push(i+1);
     }
-    console.log("currenPage: " + currentPage);
+    console.log("currentPage: " + currentPage);
+    console.log("recipesPerPage: " + recipesPerPage);
+    console.log("allRecipes: " + allRecipes);
+    console.log("paginado: " + paginado);
+    console.log("page numbers: " + pageNumbers);
     return(
         <nav className="paginado__nav">
             <ul className="paginado__ul">

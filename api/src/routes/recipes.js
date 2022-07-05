@@ -32,8 +32,10 @@ router.get("/", async (req, res) => {
                 })
                 return res.status(200).send(recipesFiltered); 
             }
-            //Si no existe ninguna receta mostrar un mensaje adecuado
-            return res.status(404).send("No se encontró la receta"); 
+            else{
+                //Si no existe ninguna receta mostrar un mensaje adecuado
+                res.status(200).send(filtered); 
+            }
         }
         // Si no se filtra la receta (valor por default al cargar la pagina web), traeme todas
         else{            

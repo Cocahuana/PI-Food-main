@@ -5,12 +5,16 @@ const dietTypesFromDb =
                 'ketogenic', 
                 'vegetarian', 
                 'lacto vegetarian',
+                'lacto ovo vegetarian',
                 'ovo vegetarian', 
                 'vegan', 
-                'pescetarian', 
-                'paleo', 
+                'pescatarian', 
+                'pescetarian',
+                'paleo',
+                'paleolithic', 
                 'primal', 
-                'low fodmap', 
+                'low fodmap',
+                'fodmap friendly', 
                 'whole30'
             ];
 

@@ -5,7 +5,7 @@
 require('dotenv').config();
 const axios = require('axios');
 const { API_KEY } = process.env;
-const BRING_ONLY_100 = "number=20";
+const BRING_ONLY_100 = "number=10";
 const DETAIL_URL = "addRecipeInformation=true";
 const { Recipe, Diet} = require("../db");
 

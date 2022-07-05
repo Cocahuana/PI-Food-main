@@ -114,11 +114,15 @@ export default function Home() {
                         <option value='ketogenic'>Ketogenic</option>
                         <option value='vegetarian'>Vegetarian</option>
                         <option value='lacto vegetarian'>Lacto Vegetarian</option>
+                        <option value='lacto ovo vegetarian'>Lacto ovo Vegetarian</option>
                         <option value='ovo vegetarian'>Ovo Vegetarian</option>
                         <option value='vegan'>Vegan</option>
+                        <option value='pescatarian'>Pescatarian</option>
                         <option value='pescetarian'>Pescetarian</option>
                         <option value='paleo'>Paleo</option>
+                        <option value='paleolithic'>Paleolithic</option>
                         <option value='primal'>Primal</option>
+                        <option value='fodmap friendly'>Fodmap friendly</option>
                         <option value='low fodmap'>Low Fodmap</option>
                         <option value='whole 30'>Whole 30</option>
                     </select>
@@ -148,6 +152,9 @@ export default function Home() {
             </div>
             <div className="home-cards">
                 {
+                    currentRecipes.length === 0 ? (
+                        <h2 className="error-msg">Recipes not found!</h2>
+                    ):
                     //Renderizo el componente card
                     //Primero pregunto si existe
                     currentRecipes?.map((e) =>{
