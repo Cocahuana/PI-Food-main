@@ -7,9 +7,14 @@ export const POST_RECIPE = 'POST_RECIPE';
 export const ORDER_BY_TITLE = 'ORDER_BY_TITLE';
 export const ORDER_BY_HEALTHSCORE = 'ORDER_BY_HEALTHSCORE';
 export const GET_RECIPE_DETAILS = 'GET_RECIPE_DETAILS';
+export const LOADING = 'LOADING';
 
 export function getRecipes(){
     return async function(dispatch){
+        dispatch({
+            type: LOADING,
+        })
+
         var json = await axios.get("http://localhost:3001/getRecipes",{
             
         });

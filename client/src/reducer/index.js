@@ -7,6 +7,7 @@ import {
     ORDER_BY_HEALTHSCORE,
     POST_RECIPE,
     GET_RECIPE_DETAILS,
+    LOADING,
 } from '../actions'
 //Armamos el estado inicial
 const initialState = {
@@ -15,18 +16,25 @@ const initialState = {
     allRecipes: [],
     diets: [],
     recipesDetail: [],
+    loading: false
 }
 
 
 function rootReducer(state = initialState, action){
     switch(action.type){
+        case LOADING :
+            return{
+                ...state,
+                loading : true
+            }
         case GET_RECIPES:
             return {
                 ...state,
                 //Guardo todas las recetas en recipes
                 recipes: action.payload,
                 //Aca tambien guardo todas las recetas, solo que uso este para no perder el estado de las mismas al filtrar
-                allRecipes: action.payload
+                allRecipes: action.payload,
+                loading: false
             }
         case FILTER_BY_DIETS:
             const allRecipes = state.allRecipes;

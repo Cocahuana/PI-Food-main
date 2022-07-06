@@ -109,11 +109,11 @@ export default function RecipeCreate(){
                 <div className="CTA-container">
                     <div className="createrecipe-CTA-goBack">
                         <Link to='/home'>
-                            <button className="CTA-goBack" onClick={handleSubmit} disabled={Object.values(errors).length}>Volver</button>
+                            <button className="CTA-goBack">Volver</button>
                         </Link>
                     </div>
                     <div className="createrecipe-CTA-submit">                    
-                        <button className="CTA-submit" onClick={e => handleSubmit(e)} type='submit'>Crear Receta</button>
+                        <button className="CTA-submit" onClick={e => handleSubmit(e)} type='submit' disabled={Object.values(errors).length}>Crear Receta</button>
                     </div>
                 </div>
                 <h1 className="createrecipe-title">Let's create a recipe!</h1>

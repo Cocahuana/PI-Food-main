@@ -193,4 +193,16 @@
                     background-color: beige;
                     color:  var(--border-yellow);
                 }
+
+
+                .CTA-submit:disabled{
+                    background-color: #cccccc;
+                    cursor: not-allowed;
+                }
+
+                .CTA-submit:disabled:hover{
+                    color: rgba(var(--bg-darkRGBA));
+                    background-color: #cccccc;
+                    cursor: not-allowed;
+                }
         

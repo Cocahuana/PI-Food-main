@@ -18,6 +18,7 @@ export default function Home() {
     //Es lo mismo que hacer un mapStateToProps
     // Se declara la constante allRecipes para almacenar todo lo que está en el estado de recipes
     const allRecipes = useSelector ((state) => state.recipes);
+    const loading = useSelector ((state) => state.loading);
 
     //Vamos a setear estados locales
     const [orden, setOrden] = useState('');
@@ -74,6 +75,91 @@ export default function Home() {
     }
 
     //Vamos a renderizarlo
+    if(loading){
+        return (
+            <div className="home grid-container">
+                <div className="home-filters">
+                    <h1 className="home-filters__title">FOOD PI</h1>
+                    
+                </div>
+                <div className="home-paginado">
+                    <div className="home-painado-container">
+                        <Paginado
+                            recipesPerPage={recipesPerPage}
+                            allRecipes={allRecipes.length}
+                            paginado= {paginado}
+                            currentPage={currentPage}
+                        />
+                    </div>
+                </div>
+                <div className="home-searchbar">
+                    
+                    <h3 className="searchbar-h3-1">Sort in Alphabetical order</h3>
+                    <div className="filter-a-z">
+                        <select onChange={e => handleSortTitle(e)}>
+                            <option value="ascendente">A - Z</option>
+                            <option value="descendente">Z - A</option>
+                        </select>
+                    </div>
+                    <h3 className="searchbar-h3-2">Order by Health Score</h3>
+                    <div className="filter-healthScore">
+                        <select onChange={e => handleSortHealthScore(e)}>
+                            <option value="mostHS">Most HealthScore</option>
+                            <option value="lessHS">Less HealthScore</option>
+                        </select>
+                    </div>
+                    <h3 className="searchbar-h3-3">Ordey by Diet Type</h3>
+                    <div className="filter-diet">
+                        <select onChange={e => {handleFilterDiets(e)}}>
+                            <option value='All'>All</option>
+                            <option value='gluten free'>Gluten Free</option>
+                            <option value='ketogenic'>Ketogenic</option>
+                            <option value='vegetarian'>Vegetarian</option>
+                            <option value='lacto vegetarian'>Lacto Vegetarian</option>
+                            <option value='lacto ovo vegetarian'>Lacto ovo Vegetarian</option>
+                            <option value='ovo vegetarian'>Ovo Vegetarian</option>
+                            <option value='vegan'>Vegan</option>
+                            <option value='pescatarian'>Pescatarian</option>
+                            <option value='pescetarian'>Pescetarian</option>
+                            <option value='paleo'>Paleo</option>
+                            <option value='paleolithic'>Paleolithic</option>
+                            <option value='primal'>Primal</option>
+                            <option value='fodmap friendly'>Fodmap friendly</option>
+                            <option value='low fodmap'>Low Fodmap</option>
+                            <option value='whole 30'>Whole 30</option>
+                        </select>
+                    </div>
+    
+    
+    
+                    <div className="home-searchbar__searchbar">
+                        <SearchBar setCurrentPage={setCurrentPage}/>
+                    </div>
+                    <div className="home-searchbar__reloadRecipes">
+                        <div className="flex justify-center align-center w100 h100">
+                            <button className="searchbar__reloadRecipesCTA" onClick={e => {handleClick(e)}}>
+                                Reload Recipes
+                            </button>
+                        </div>
+                    </div>
+                    <div className="home-searchbar__createRecipe">
+                        <Link to='/postRecipe'>
+                            <div className="flex justify-center align-center w100 h100">
+                                <button className="searchbar__reloadRecipesCTA">
+                                    Create a Recipe 
+                                </button>
+                            </div>
+                        </Link>
+                    </div>
+                </div>
+                <div className="home-cards">
+                    {
+                        <h2 className="error-msg">Loading...</h2>
+                    }
+                </div>
+            </div>
+        )
+    }
     return (
         <div className="home grid-container">
             <div className="home-filters">
