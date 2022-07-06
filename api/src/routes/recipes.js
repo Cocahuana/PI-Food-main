@@ -3,8 +3,6 @@ const express = require('express');
 
 //importar controllers
 const { getAllRecipes } = require('../controllers/recipes');
-const { getRecipesValidation } = require('../controllers/validations');
-
 
 const router = express();
 
@@ -30,7 +28,7 @@ router.get("/", async (req, res) => {
                         dietTypes: e.dietTypes ? e.dietTypes : e.diets.map(e => e.dietName),
                     }
                 })
-                return res.status(200).send(recipesFiltered); 
+                res.status(200).send(recipesFiltered); 
             }
             else{
                 //Si no existe ninguna receta mostrar un mensaje adecuado
@@ -53,6 +51,8 @@ router.get("/", async (req, res) => {
     }
     catch(error){ return res.status(400).json(error.message); }
 });
+
+
 
 
 module.exports = router;

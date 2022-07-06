@@ -71,6 +71,7 @@ function rootReducer(state = initialState, action){
         case ORDER_BY_TITLE:
             let sortedTitle = action.payload === 'ascendente' ?
                 state.recipes.sort(function (a, b) {
+                    
                     if(a.title > b.title){
                         return 1;
                     }

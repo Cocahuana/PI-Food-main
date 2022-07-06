@@ -3,6 +3,7 @@ function validate(input){
     let {title, summary, healthScore, analyzedInstructions, img, diet} = input;
     let whitespacesParameter =  /(?!^\s+$)^.*$/m;
     let alphabeticalPattern = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/;
+    let firstUpper = /^[A-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/;
     let emailPattern = /\S\@\S+\S+/; // Expresion Regular para validar Emails.
     let oneTo100Parameter = /^[1-9]$|^[1-9][0-9]$|^(100)$/;
 
@@ -12,6 +13,7 @@ function validate(input){
         if(!whitespacesParameter.test(title)) errors.title = 'No whitespaces allowed';
         if(emailPattern.test(title)) errors.title = 'Title can not have an email pattern';
         if(title.includes("@")) errors.title = 'Title can not have @';
+        if(!firstUpper.test(title)) errors.title = 'First letter must be in Upper Case';
         if(!alphabeticalPattern.test(title)) errors.title = 'Title must has only alphabetical characters. Example: ñoñerías, French Fries, Soup number One etc';
     //---------- Title End ----------//
 

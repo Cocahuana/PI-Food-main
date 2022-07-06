@@ -5,6 +5,7 @@
     background-color: rgba(0, 0, 0, 0.9);
     grid-template-columns: repeat(12, 1fr);
     padding: 2rem;
+    min-height: 100vh;
 }
 
     .details-container{
@@ -181,8 +182,7 @@
 
                     .goBack{
                         width: 100%;
-                        height: 25%;
-                        max-height: 25%;
+                        height: auto;
                     }
                     
                     

@@ -119,7 +119,7 @@ export default function RecipeCreate(){
                 <form className="createrecipe-form" onSubmit={(e) => handleSubmit(e)}>
                     <div className="form-div">
                         <div className="form-input-div">
-                            <label className="form-label">Titulo:</label>
+                            <label className="form-label">Title:</label>
                             <input className="form__input"
                                 type= "text"
                                 value= {input.title}
@@ -142,7 +142,7 @@ export default function RecipeCreate(){
                     <div className="form-div">
                         
                         <div className="form-input-div">
-                            <label  className="form-label">Resumen:</label>
+                            <label  className="form-label">Summary:</label>
                             <input className="form__input"
                                 type= "text"
                                 value= {input.summary}

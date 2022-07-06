@@ -5,17 +5,16 @@ import Home from './components/Home';
 import RecipeCreate from './components/RecipeCreate';
 import RecipeDetail from './components/RecipeDetail';
 import Error404 from './components/Error404';
+import React from 'react';
 
 function App() {
   return (
     <Switch>
-      <div className="App">
         <Route exact path="/" component={LandingPage}/>
         <Route exact path="/home" component={Home}/>
-        <Route path="/postRecipe" component={RecipeCreate}/>
+        <Route exact path="/postRecipe" component={RecipeCreate}/>
         <Route exact path="/home/:id" component={RecipeDetail}/>
         <Route path="*" component={Error404}/>
-      </div>
     </Switch>
   );
 }

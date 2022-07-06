@@ -1,0 +1,79 @@
+.bg-404{
+    width: 100%;
+    height: 100vh;
+    background: url("../assets/images/bg-pageNotFound.jpg") no-repeat;
+    background-size: cover;
+}
+
+.bg-dark{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.error-container{
+    background-color: rgba(0, 0, 0, 0.5);
+    width: auto;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.error404-h1,
+.error404-h2,
+.error404-CTA-container{
+    margin: 1rem;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+}
+
+.error404-h1,
+.error404-h2{
+    color: var(--clr-light);
+    letter-spacing: 0.3rem;    
+}
+
+.error404-h1{
+    width: 30%;
+    font-size: 5rem;    
+    border-bottom: 1px solid var(--border-yellow);
+}
+.error404-h2{
+    font-size: 4rem;
+}
+
+.error404-CTA{
+    width: 100%;
+    height: 100%;
+    color: beige;
+    border: 3px solid var(--border-yellow);
+    border-radius: 1rem;
+    background-color: rgba(var(--bg-darkRGBA));             
+    transition: 1s;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.2rem;   
+}
+
+.error404-CTA:hover{
+    width: 100%;
+    height: 100%;
+    color: rgb(var(--clr-black));
+    border: 3px solid var(--border-yellow);
+    border-radius: 1rem;
+    background-color:beige;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.2rem;    
+}

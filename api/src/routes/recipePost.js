@@ -18,13 +18,10 @@ router.post("/", async (req, res) => {
             stepFromDb,
         });
 
-        console.log("dietTypes: " + diet);
-
         let dietTypesRecipeForDb = await Diet.findAll({
             where: {dietName: diet}
         });
 
-        console.log("dietType: " + dietTypesRecipeForDb);
         newRecipe.addDiet(dietTypesRecipeForDb);
         res.status(200).send(newRecipe);
     }
