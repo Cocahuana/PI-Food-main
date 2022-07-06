@@ -73,7 +73,7 @@ export default function RecipeCreate(){
 
     function handleSubmit(e){
         e.preventDefault();
-
+        
          if (Object.values(errors).length > 0) {
              alert("Please complete the information required");
          } else if (
@@ -83,7 +83,8 @@ export default function RecipeCreate(){
             input.stepFromDb === '' ||
             input.img === '' ||
             input.diet.length === 0) {
-            alert("Please complete the form");}
+            alert("Please complete the form");
+        }
         else {
             dispatch(postRecipe(input));
             alert('New recipe added successfully!')
@@ -108,7 +109,7 @@ export default function RecipeCreate(){
                 <div className="CTA-container">
                     <div className="createrecipe-CTA-goBack">
                         <Link to='/home'>
-                            <button className="CTA-goBack">Volver</button>
+                            <button className="CTA-goBack" onClick={handleSubmit} disabled={Object.values(errors).length}>Volver</button>
                         </Link>
                     </div>
                     <div className="createrecipe-CTA-submit">                    

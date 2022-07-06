@@ -14,6 +14,7 @@ function App() {
         <Route exact path="/home" component={Home}/>
         <Route exact path="/postRecipe" component={RecipeCreate}/>
         <Route exact path="/home/:id" component={RecipeDetail}/>
+        <Route exact path="/error404" component={Error404}/>
         <Route path="*" component={Error404}/>
     </Switch>
   );

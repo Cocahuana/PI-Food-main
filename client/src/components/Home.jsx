@@ -3,7 +3,7 @@ import './Home.css'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
 import { getRecipes, filterByDiets, orderByTitle, orderByHealthScore } from "../actions";
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Card from "./Card"
 import Paginado from "./Paginado";
 import SearchBar from "./SearchBar";

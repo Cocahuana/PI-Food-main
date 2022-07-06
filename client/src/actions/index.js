@@ -101,7 +101,7 @@ export function getDetails(id){
             })
         }
         catch(error){
-            console.log(error);
+            window.location.href="/error404";
         }
     }
 }
