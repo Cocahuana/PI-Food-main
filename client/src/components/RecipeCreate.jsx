@@ -26,8 +26,6 @@ export default function RecipeCreate(){
         stepFromDb: "",
         img: "",
         diet: [],
-        //Creo una variable solo para mostrar lo que busco y que no me rompa el back
-        //showDiet: [],
     })
 
     function handleChange(e) {
@@ -40,7 +38,6 @@ export default function RecipeCreate(){
             ...input,
             [name] : value
         }))
-        console.log(input);
     }
 
     function handleSelect(e){
@@ -52,8 +49,6 @@ export default function RecipeCreate(){
                 //Cada vez que haces un click en el select, se va concatenando en diet
                 //diet: [...input.diet, e.target.value],
                 diet : [...input.diet, value],
-                //Creo una variable solo para mostrar lo que busco y que no me rompa el back
-                //showDiet: [...input.diet, e.target.value],
             });
             console.log("diet: " + input.diet);
         }
@@ -69,26 +64,9 @@ export default function RecipeCreate(){
                 //Cada vez que haces un click en el select, se va concatenando en diet
                 //diet: [...input.diet, e.target.value],
                 diet : filtered,
-                //Creo una variable solo para mostrar lo que busco y que no me rompa el back
-                //showDiet: [...input.diet, e.target.value],
             });
         }
     }
-
-    // function handleChangeCheckbox(e){        
-    //     let { value, checked } = e.target;
-    //     if(checked){
-    //         setInput({
-    //             ...input,
-    //             //Cada vez que haces un click en el select, se va concatenando en diet
-    //             //diet: [...input.diet, e.target.value],
-    //             diet : [...input.diet, value],
-    //             //Creo una variable solo para mostrar lo que busco y que no me rompa el back
-    //             //showDiet: [...input.diet, e.target.value],
-    //         });
-            
-    //     }   
-    // }
 
 
     function handleSubmit(e){
@@ -259,8 +237,11 @@ export default function RecipeCreate(){
                             {
                                 input.diet.map(e => (
                                     <div className="diets-h5-container">
-                                        <h5 className="diets-h5"key={e}>{e}</h5>
-                                        <button type="button" value={e} onClick={(e) => handleDeleteDiet(e)}>X</button>    
+                                        <h5 className="diets-h5"key={e}>
+                                            {e}
+                                            <button type="button" value={e} onClick={(e) => handleDeleteDiet(e)}>X</button>
+                                        </h5>
+                                            
                                     </div>
                                 ))
                             }

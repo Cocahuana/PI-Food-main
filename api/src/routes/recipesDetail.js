@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 
+
 //importar controllers
 const { 
     getApiDetail,
@@ -12,6 +13,7 @@ const {
 
 
 const router = express();
+
 
 
 router.get("/:id", async (req, res) => {
