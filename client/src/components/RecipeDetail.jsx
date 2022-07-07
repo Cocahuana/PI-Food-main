@@ -7,14 +7,22 @@ import "./RecipeDetail.css";
 
 export default function RecipeDetail(props){
     const dispatch = useDispatch();
-    const id = props.match.params.id;
-    console.log("Id: " + id);
+    const id = props.match.params.id; 
+    const loading = useSelector ((state) => state.loading);
 
     useEffect(() => {
         dispatch(getDetails(id));
     }, [dispatch, id])
 
     const myRecipe = useSelector((state) => state.recipesDetail)
+
+    if(loading){
+        return(
+            <div className="details-grid" key={id}>
+                <h2 className="error-msg">Loading...</h2>
+            </div>
+        );
+    }
 
     return(
         <div className="details-grid" key={id}>

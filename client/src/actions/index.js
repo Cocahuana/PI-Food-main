@@ -98,7 +98,11 @@ export function orderByHealthScore(payload){
 export function getDetails(id){
     // console.log("id actions: " + id);
     return async function(dispatch){
+        
         try{
+            dispatch({
+                type: LOADING,
+            })
             var detail = await axios.get(`http://localhost:3001/getDetails/${id}`);
             return dispatch({
                 type: GET_RECIPE_DETAILS,

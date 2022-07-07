@@ -42,7 +42,6 @@ function rootReducer(state = initialState, action){
             //Si no, que me filtre por tipo de dieta que me llega
             const statusFiltered = action.payload === 'All' ? 
                 allRecipes :
-                //allRecipes.filter(e => e === action.payload);
                 forInDiets();
                 
                 function forInDiets(){
@@ -128,7 +127,8 @@ function rootReducer(state = initialState, action){
         case GET_RECIPE_DETAILS:
             return{
                 ...state,
-                recipesDetail: action.payload
+                recipesDetail: action.payload,
+                loading: false
             }
         default: 
             return state;

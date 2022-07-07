@@ -44,7 +44,7 @@ export default function Home() {
     useEffect(() => {
         //Es lo mismo que hacer un mapStateToProps
         dispatch(getRecipes());
-    }, [dispatch])
+    }, [])
 
 
     //Cuando quiera resetear las recetas, el boton me llama acá
