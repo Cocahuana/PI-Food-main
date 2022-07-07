@@ -35,9 +35,9 @@ module.exports = (sequelize) => {
     },
     //Separamos lo recibido de la API de lo creado en la BD
     createdInDb:{
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: true,
+      defaultValue: 'Created by Ezequiel',
     }
 
   });

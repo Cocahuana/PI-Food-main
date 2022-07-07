@@ -248,7 +248,7 @@ export default function Home() {
                     currentRecipes?.map((e) =>{
                         //console.log(currentRecipes);
                         return(
-                            <Card key={e.id} id={e.id}  title={e.title} img={e.img} dietTypes={e.dietTypes}/>
+                            <Card key={e.id} id={e.id}  title={e.title} img={e.img} dietTypes={e.dietTypes} createdInDb={e.createdInDb}/>
                         );
                     })
                 }

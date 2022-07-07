@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import './Card.css' 
-export default function Card({img, title, dietTypes, id}){
+export default function Card({img, title, dietTypes, id, createdInDb}){
     const diets = [];
     for(let i = 0; i < dietTypes.length; i++){
         diets.push(dietTypes[i]);
@@ -31,6 +31,7 @@ export default function Card({img, title, dietTypes, id}){
                         </button>      
                     </Link>
                 </div>
+                <p>{createdInDb}</p>
             </div>
         </div>
     );

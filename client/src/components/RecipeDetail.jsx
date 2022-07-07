@@ -48,6 +48,7 @@ export default function RecipeDetail(props){
                                         
                                     }
                                 <div className="border"></div>
+                                <p>{myRecipe.createdInDb}</p>
                             </div>
                         </div>
                         {/*inner atribute for html dangerouslySetInnerHTML, is a property that you can use on HTML elements in a React application to programmatically set their content*/}

@@ -51,6 +51,7 @@ const getDbInfo = async () => {
             summary: e.summary,
             healthScore: e.healthScore,
             dietTypes: e.diets.map(e => e.dietName),
+            createdInDb: e.createdInDb,
         }
     })
 };

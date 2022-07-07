@@ -34,6 +34,7 @@ router.get("/:id", async (req, res) => {
                     dietTypes: recipesDbById.diets.map(e => e.dietName),
                     summary: recipesDbById.summary,
                     stepFromDb: recipesDbById.stepFromDb,
+                    createdInDb: recipesDbById.createdInDb,
                 }
                 console.log(obj);
                 res.status(200).send(obj);
