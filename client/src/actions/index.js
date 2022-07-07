@@ -39,6 +39,10 @@ export function filterByDiets(payload){
 export function getRecipesByTitle(title){
     return async function (dispatch){
         try{
+            
+            dispatch({
+                type: LOADING,
+            })
             var json = await axios.get(`http://localhost:3001/getRecipes?title=` + title)
             return dispatch({
                 type: GET_RECIPES_BY_TITLE,

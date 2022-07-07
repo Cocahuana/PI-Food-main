@@ -31,6 +31,8 @@ export default function Home() {
     const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage // 0
     const currentRecipes = allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
 
+
+
     //Page 1: 1---------10
     //Page 2: 11---------20
     //Page 3: 21 --------- 30 
@@ -43,8 +45,8 @@ export default function Home() {
     //useEffect es como el componentDidMount
     useEffect(() => {
         //Es lo mismo que hacer un mapStateToProps
-        dispatch(getRecipes());
-    }, [])
+        if(!allRecipes.length) dispatch(getRecipes());
+    }, [dispatch])
 
 
     //Cuando quiera resetear las recetas, el boton me llama acá

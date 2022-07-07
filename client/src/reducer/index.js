@@ -63,7 +63,8 @@ function rootReducer(state = initialState, action){
             return{
                 ...state,
                 // recipes es lo que se está renderizando
-                recipes: action.payload
+                recipes: action.payload,
+                loading: false
             }
         case GET_DIETS:
             return{

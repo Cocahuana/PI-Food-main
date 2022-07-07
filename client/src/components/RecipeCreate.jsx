@@ -45,6 +45,8 @@ export default function RecipeCreate(){
 
     function handleSelect(e){
         let { value } = e.target;
+        if(value && !input.diet.includes(value)){
+
             setInput({
                 ...input,
                 //Cada vez que haces un click en el select, se va concatenando en diet
@@ -53,6 +55,24 @@ export default function RecipeCreate(){
                 //Creo una variable solo para mostrar lo que busco y que no me rompa el back
                 //showDiet: [...input.diet, e.target.value],
             });
+            console.log("diet: " + input.diet);
+        }
+    }
+
+    function handleDeleteDiet(e){
+        let { value } = e.target;
+        console.log("HOLA");
+        if(value && input.diet.includes(value)){
+            let filtered = input.diet.filter(e => e !== value);
+            setInput({
+                ...input,
+                //Cada vez que haces un click en el select, se va concatenando en diet
+                //diet: [...input.diet, e.target.value],
+                diet : filtered,
+                //Creo una variable solo para mostrar lo que busco y que no me rompa el back
+                //showDiet: [...input.diet, e.target.value],
+            });
+        }
     }
 
     // function handleChangeCheckbox(e){        
@@ -239,7 +259,8 @@ export default function RecipeCreate(){
                             {
                                 input.diet.map(e => (
                                     <div className="diets-h5-container">
-                                        <h5 className="diets-h5" key={e}>{e}</h5>    
+                                        <h5 className="diets-h5"key={e}>{e}</h5>
+                                        <button type="button" value={e} onClick={(e) => handleDeleteDiet(e)}>X</button>    
                                     </div>
                                 ))
                             }
