@@ -20,12 +20,12 @@ const getApiInfo = async () => {
             img: e.image,
             dietTypes: e.diets,
             summary: e.summary,
-            analyzedInstructions: e.analyzedInstructions[0]?.steps.map(e => {
-                return {
-                    number: e.number,
-                    step: e.step
-                }
-            })
+            // analyzedInstructions: e.analyzedInstructions[0]?.steps.map(e => {
+            //     return {
+            //         number: e.number,
+            //         step: e.step
+            //     }
+            // })
         }
     })
     return apiInfo;
